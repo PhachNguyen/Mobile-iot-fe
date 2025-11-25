@@ -166,7 +166,7 @@ const styles = StyleSheet.create({
 
   btnFollow: {
     flex: 1,
-    backgroundColor: "#3c706cff",
+    backgroundColor: "#26d365ff",
     paddingVertical: 20,
     borderRadius: 50, // ⬅ bo góc mềm
     marginRight: 10,

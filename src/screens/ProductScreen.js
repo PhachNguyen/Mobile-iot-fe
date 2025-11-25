@@ -9,6 +9,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const plantsData = [
   {
@@ -77,75 +78,77 @@ export default function PlantListScreen({ navigation }) {
   };
 
   return (
-    <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
-      <Text style={styles.pageTitle}>Sản phẩm nông nghiệp</Text>
-      <Text style={styles.pageDesc}>
-        Danh sách cây đang được theo dõi độ ẩm
-      </Text>
+    <SafeAreaView style={{ flex: 1, backgroundColor: "#f3f6f2" }}>
+      <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
+        <Text style={styles.pageTitle}>Sản phẩm nông nghiệp</Text>
+        <Text style={styles.pageDesc}>
+          Danh sách cây đang được theo dõi độ ẩm
+        </Text>
 
-      {/* SEARCH BAR */}
-      <View style={styles.searchBox}>
-        <Ionicons name="search" size={20} color="#6b7280" />
-        <TextInput
-          placeholder="Tìm kiếm cây trồng..."
-          value={search}
-          onChangeText={setSearch}
-          style={styles.searchInput}
-        />
-      </View>
+        {/* SEARCH BAR */}
+        <View style={styles.searchBox}>
+          <Ionicons name="search" size={20} color="#6b7280" />
+          <TextInput
+            placeholder="Tìm kiếm cây trồng..."
+            value={search}
+            onChangeText={setSearch}
+            style={styles.searchInput}
+          />
+        </View>
 
-      {/* GRID LIST */}
-      <View style={styles.plantGrid}>
-        {filteredPlants.map((p) => (
-          <TouchableOpacity
-            key={p.id}
-            style={styles.card}
-            onPress={() =>
-              navigation.navigate("Detail", {
-                name: p.name,
-                image: p.image,
-                idealMoisture: p.idealMoisture,
-                desc: p.desc,
-                currentMoisture: p.currentMoisture,
-              })
-            }
-          >
-            <Image source={{ uri: p.image }} style={styles.image} />
+        {/* GRID LIST */}
+        <View style={styles.plantGrid}>
+          {filteredPlants.map((p) => (
+            <TouchableOpacity
+              key={p.id}
+              style={styles.card}
+              onPress={() =>
+                navigation.navigate("Detail", {
+                  name: p.name,
+                  image: p.image,
+                  idealMoisture: p.idealMoisture,
+                  desc: p.desc,
+                  currentMoisture: p.currentMoisture,
+                })
+              }
+            >
+              <Image source={{ uri: p.image }} style={styles.image} />
 
-            <View style={styles.cardBody}>
-              <Text style={styles.name}>{p.name}</Text>
-              <Text style={styles.ideal}>Lý tưởng: {p.idealMoisture}</Text>
+              <View style={styles.cardBody}>
+                <Text style={styles.name}>{p.name}</Text>
+                <Text style={styles.ideal}>Lý tưởng: {p.idealMoisture}</Text>
 
-              <View style={styles.moistureRow}>
-                <Ionicons name="water-outline" size={14} color="#0ea5e9" />
-                <Text style={styles.current}>
-                  Hiện tại: {p.currentMoisture}%
-                </Text>
+                <View style={styles.moistureRow}>
+                  <Ionicons name="water-outline" size={14} color="#0ea5e9" />
+                  <Text style={styles.current}>
+                    Hiện tại: {p.currentMoisture}%
+                  </Text>
+                </View>
+
+                {/* STATUS TAG */}
+                <View
+                  style={[
+                    styles.statusTag,
+                    {
+                      backgroundColor: getStatusColor(
+                        p.currentMoisture,
+                        p.idealMoisture
+                      ),
+                    },
+                  ]}
+                >
+                  <Text style={styles.statusText}>
+                    {getStatusText(p.currentMoisture, p.idealMoisture)}
+                  </Text>
+                </View>
               </View>
+            </TouchableOpacity>
+          ))}
+        </View>
 
-              {/* STATUS TAG */}
-              <View
-                style={[
-                  styles.statusTag,
-                  {
-                    backgroundColor: getStatusColor(
-                      p.currentMoisture,
-                      p.idealMoisture
-                    ),
-                  },
-                ]}
-              >
-                <Text style={styles.statusText}>
-                  {getStatusText(p.currentMoisture, p.idealMoisture)}
-                </Text>
-              </View>
-            </View>
-          </TouchableOpacity>
-        ))}
-      </View>
-
-      <View style={{ height: 40 }} />
-    </ScrollView>
+        <View style={{ height: 40 }} />
+      </ScrollView>
+    </SafeAreaView>
   );
 }
 

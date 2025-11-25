@@ -8,39 +8,33 @@ import {
   ScrollView,
 } from "react-native";
 
-export default function App() {
+export default function LoginScreen({ navigation }) {
   return (
     <ScrollView style={{ flex: 1, backgroundColor: "#F2F8F4" }}>
       <View style={styles.container}>
         {/* LEFT ILLUSTRATION */}
         <View style={styles.left}>
           <Text style={styles.smart}>Smart Farmer</Text>
+
           <View style={styles.earnWrap}>
             <Text style={styles.earn}>Earn</Text>
             <Text style={styles.profit}>Smart Profit</Text>
           </View>
 
           <View style={styles.centerImg}>
-            {/* <Image
-              source={require("./assets/farmer.png")}
-              style={{ width: 220, height: 350, resizeMode: "contain" }}
-            /> */}
+            <Image
+              source={{
+                uri: "https://cdn-icons-png.flaticon.com/512/685/685025.png",
+              }}
+              style={{ width: 180, height: 180, resizeMode: "contain" }}
+            />
           </View>
-
-          {/* <Image
-            source={require("./assets/profit.png")}
-            style={styles.cardLeft}
-          /> */}
-          {/* 
-          <Image
-            source={require("./assets/order.png")}
-            style={styles.cardRight}
-          /> */}
         </View>
 
         {/* RIGHT LOGIN BOX */}
         <View style={styles.right}>
           <Text style={styles.welcome}>Welcome to</Text>
+
           <Text style={styles.smartCrop}>
             Smart<Text style={{ color: "#FFB800" }}>Crop</Text>
           </Text>
@@ -70,6 +64,19 @@ export default function App() {
           <TouchableOpacity style={styles.signInBtn}>
             <Text style={styles.btnText}>SIGN IN →</Text>
           </TouchableOpacity>
+
+          {/* REGISTER LINK */}
+          <TouchableOpacity
+            style={{ marginTop: 20 }}
+            onPress={() => navigation.navigate("register")}
+          >
+            <Text style={styles.registerText}>
+              Don't have an account?{" "}
+              <Text style={{ fontWeight: "700", color: "#4D8A5B" }}>
+                Sign Up
+              </Text>
+            </Text>
+          </TouchableOpacity>
         </View>
       </View>
     </ScrollView>
@@ -79,14 +86,14 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignContent: "center",
-    display: flex
-    paddingVertical: 100,
+    paddingVertical: 60,
     paddingHorizontal: 20,
   },
+
+  /* LEFT */
   left: {
     alignItems: "center",
-    marginBottom: 30,
+    marginBottom: 40,
   },
 
   smart: {
@@ -94,16 +101,19 @@ const styles = StyleSheet.create({
     color: "#4D8A5B",
     fontWeight: "600",
   },
+
   earnWrap: {
     flexDirection: "row",
     alignItems: "baseline",
     gap: 6,
   },
+
   earn: {
     fontSize: 40,
     color: "#E9A531",
     fontWeight: "700",
   },
+
   profit: {
     fontSize: 20,
     color: "#4D8A5B",
@@ -111,41 +121,29 @@ const styles = StyleSheet.create({
   },
 
   centerImg: {
-    marginTop: 10,
-  },
-  cardLeft: {
-    position: "absolute",
-    left: 0,
-    top: 150,
-    width: 120,
-    height: 90,
-    resizeMode: "contain",
-  },
-  cardRight: {
-    position: "absolute",
-    right: 0,
-    top: 200,
-    width: 120,
-    height: 90,
-    resizeMode: "contain",
+    marginTop: 20,
   },
 
+  /* RIGHT LOGIN BOX */
   right: {
     backgroundColor: "white",
-    padding: 20,
+    padding: 22,
     borderRadius: 20,
     elevation: 3,
   },
+
   welcome: {
     fontSize: 18,
     color: "#555",
   },
+
   smartCrop: {
-    fontSize: 30,
+    fontSize: 32,
     fontWeight: "700",
     color: "#4D8A5B",
     marginBottom: 6,
   },
+
   sub: {
     fontSize: 13,
     color: "#777",
@@ -158,6 +156,7 @@ const styles = StyleSheet.create({
     color: "#444",
     marginBottom: 5,
   },
+
   input: {
     height: 48,
     borderWidth: 1,
@@ -179,10 +178,17 @@ const styles = StyleSheet.create({
     paddingVertical: 14,
     borderRadius: 10,
   },
+
   btnText: {
     textAlign: "center",
     fontWeight: "700",
     color: "#333",
     fontSize: 16,
+  },
+
+  registerText: {
+    textAlign: "center",
+    color: "#666",
+    fontSize: 14,
   },
 });

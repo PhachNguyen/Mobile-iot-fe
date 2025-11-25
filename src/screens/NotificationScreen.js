@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const notifications = [
   {
@@ -56,28 +57,34 @@ export default function NotificationScreen() {
   };
 
   return (
-    <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
-      <Text style={styles.title}>Thông báo</Text>
-      <Text style={styles.desc}>Cập nhật mới từ hệ thống IoT</Text>
+    <SafeAreaView style={styles.safe}>
+      <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
+        <Text style={styles.title}>Thông báo</Text>
+        <Text style={styles.desc}>Cập nhật mới từ hệ thống IoT</Text>
 
-      {notifications.map((n) => (
-        <TouchableOpacity key={n.id} style={styles.card}>
-          <View style={styles.iconBox}>{getIcon(n.type)}</View>
+        {notifications.map((n) => (
+          <TouchableOpacity key={n.id} style={styles.card}>
+            <View style={styles.iconBox}>{getIcon(n.type)}</View>
 
-          <View style={styles.cardContent}>
-            <Text style={styles.cardTitle}>{n.title}</Text>
-            <Text style={styles.cardTime}>{n.time}</Text>
-            <Text style={styles.cardDesc}>{n.desc}</Text>
-          </View>
-        </TouchableOpacity>
-      ))}
+            <View style={styles.cardContent}>
+              <Text style={styles.cardTitle}>{n.title}</Text>
+              <Text style={styles.cardTime}>{n.time}</Text>
+              <Text style={styles.cardDesc}>{n.desc}</Text>
+            </View>
+          </TouchableOpacity>
+        ))}
 
-      <View style={{ height: 40 }} />
-    </ScrollView>
+        <View style={{ height: 40 }} />
+      </ScrollView>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
+  safe: {
+    flex: 1,
+    backgroundColor: "#f3f6f2", // tránh đụng camera
+  },
   container: {
     backgroundColor: "#f3f6f2",
     flex: 1,

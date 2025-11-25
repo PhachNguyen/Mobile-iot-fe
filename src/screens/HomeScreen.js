@@ -6,10 +6,10 @@ import {
   ScrollView,
   Image,
   TouchableOpacity,
-  SafeAreaView,
   ImageBackground,
 } from "react-native";
 import { Ionicons, MaterialIcons } from "@expo/vector-icons";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const plants = [
   {
