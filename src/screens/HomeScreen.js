@@ -146,7 +146,7 @@ export default function HomeScreen({ navigation }) {
               key={p.id}
               style={styles.plantCard}
               onPress={() =>
-                navigation.navigate("PlantDetail", {
+                navigation.navigate("Detail", {
                   name: p.name,
                   image: p.image,
                   idealMoisture: p.idealMoisture,
